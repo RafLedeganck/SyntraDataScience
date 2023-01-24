@@ -2,10 +2,6 @@
 import Levenshtein
 import random
 
-gv_objects = []
-gv_playerscore = 0
-gv_computerscore = 0
-
 def clean_guess(iv_guess, iv_objects):
     lv_list = [Levenshtein.distance(iv_guess, iv_objects[0]),
                Levenshtein.distance(iv_guess, iv_objects[1]),
@@ -14,6 +10,7 @@ def clean_guess(iv_guess, iv_objects):
     return iv_objects[lv_min]
 
 def main():
+    gv_objects = []
     print('Please enter the 3 objects you want to play the game with:')
     lv_object = str(input('Object 1 (beats object 2):'))
     gv_objects.append(lv_object)
