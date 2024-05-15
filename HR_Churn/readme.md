@@ -35,7 +35,7 @@ Functions are defined.  More info in the docstring of each function.<br>
 Most noteworthy, however, is § 1.2 which contains program switches that de-/activate the export of plots to the /Output folder or the grid searches to find the optimal parameters for the learning models.
 
 ### 2. Data loading
-File location for the training file: Data/Employee_Churn_train.csv
+Training file: Data/Employee_Churn_train.csv
 
 ### 3. Data Exploration
 Data preparation & cleaning.  NaN are filled with values from similar rows, replaced with 'None' or 0 depending on the feature.  Any NaN that could not resolved are dropped if in total less than 2% of the lines.
@@ -52,6 +52,7 @@ Also the performance of a Neural Network is checked, on the full feature set.<br
 Performance plots of the models are not exported because they have little business value.
 
 ### 6. Prediction on new dataset
+New file: Data/Employee_Churn_train.csv<br>
 The best performing model is then re-trained on the full training data set (without train-test split) and applied to calculate predictions and probabilities on a new data set.
 
 ### 7. Further data analysis
