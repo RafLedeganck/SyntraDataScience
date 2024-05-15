@@ -1,46 +1,58 @@
-1. Setting the stage
-1.1 Imports
-1.2 Program switches
-1.3 Functions
-2. Data loading
-3. Data Exploration
-3.1 Data preparation¶
-3.2 Data cleaning
-3.3 Data Transformation (1)
-4. Feature reduction
-4.1 Check data redundancy (Filter)
-4.1.1 Check for quasi-constant features
-4.1.2 Check feature variance
-4.1.3 Check feature correlation with target
-4.1.4 Check correlation between bonus details and total
-4.1.5 Check mutual information
-4.2 Feature reduction - embedded
-4.2.1 Data transformation (2)
-4.2.2 Random Forest
-4.2.3 Gradient boosting
-4.2.4 Logistic Regression
-5. Predictions
-5.1 Data preparations
-5.1.1 Check if dataset is balanced
-5.1.2 Train-test split
-5.1.3 Scaling & transformation
-5.2 Reduced dataset
-5.2.1 Random forest
-5.2.2 Support Vector Machines
-5.2.3 Logistic Regression
-5.3 Full feature set
-5.3.1 Train-test split
-5.3.2 Scaling & transformation
-5.3.3 Neural Network
-5.4 Balanced dataset
-5.4.1 Random forest
-5.4.2 Support Vector Machines
-5.4.3 Logistic Regression
-6. Prediction on new dataset
-6.1 Train model on full training dataset
-6.2 New dataset
-6.3 Data cleaning
-6.4 Data transformation
-6.5 Predict
-7. Further data analysis
-7.1 Check where churn is higher than average
+# Highlights
+### Goal
+This program calculates churn risk based on employee data.  Features include organizational master data (e.g. site, department and employee type) but also <b>highly sensitive personal data</b> like handicap and <b>sensitive</b> personal financial data (bonus amounts).<br>
+The program has 2 objectives:<ul>
+<li>Explore how the feature set can be reduced so the predictions can be made on as few features as possible, thus (1) reducing the need for personal data, (2) making the model as transparant as possible, (3) making it as widely usable as possible and (4) maximizing efficiency.</li>
+<li>Based on a minimal feature set search the prediction model that performs best.</li></ul>
+In the process we will try to draw lessons from the data at hand and provide useful business insights.  These insights are presented via plots from different angles at the data.
+
+### Me
+[RafLedeganck on GitHub](https://github.com/RafLedeganck)<br>
+The program was written in the context of the course 'Data Scientist' at Syntra AB over 2022-2024 .
+
+### Principles and assumptions
+<ul>
+<li>Model training was done on anonymized data but for the predictions it is esteemed important to be able to act upon the conclusions of the data analysis. If the user doesn't know the person behind a churn risk calculation, the exercise does not make much sense. <b>It is left to the person executing the program to handle the outcome with the necessary caution.</b>  The plots that are output to the /Output folder are at a sufficiently high level to avoid direct identification but should nevertheless not be distributed innecessarily.
+<li>The program was developed in a Tensorflow 2.11.0 Docker container.</li>
+</ul><br>
+
+# Folder structure
+<ul><li>root</li><ul>
+    this file
+<li>\Docu: (o.a.) the business presentation (to come in a couple of days)</li>
+<li>\Notebooks<ul>
+    latest version of the program (Jupyter notebook)
+    <li>\Backup: archive for old versions</li>
+    <li>\Data: input files</li>
+    <li>\Output: plots in .jpg format</li></ul>
+    </ul>
+</ul></li><br>
+
+# Program structure
+### 1. Setting the stage
+Package are installed and modules imported.<br>
+Functions are defined.  More info in the docstring of each function.<br>
+Most noteworthy, however, is § 1.2 which contains program switches that de-/activate the export of plots to the /Output folder or the grid searches to find the optimal parameters for the learning models.
+
+### 2. Data loading
+File location for the training file: Data/Employee_Churn_train.csv
+
+### 3. Data Exploration
+Data preparation & cleaning.  NaN are filled with values from similar rows, replaced with 'None' or 0 depending on the feature.  Any NaN that could not resolved are dropped if in total less than 2% of the lines.
+
+### 4. Feature reduction
+The first main goal of the program.  Two approaches are explored:<ul>
+<li>Filtering by checking for quasi-constant features, checking variance and correlations. Also Mutual Information is calculated.</li>
+<li>Feature reduction embedded in learning models.  Random Forest, Gradient Boosting and Logistic Regression are explored.  For each model the result for the full and reduced feature set are compared.  It is also checked if dimension reduction via Principle Components Analysis sheds a useful light on which features are more/less relevant.</li>
+</ul>
+
+### 5. Learning models
+The 2nd important goal of the program.  After checking whether the dataset is balanced, the performance of Random Forest, Support Vector Machines and Logistic Regression on the reduced feature set is compared with the full training set (and correction for imbalance) against training on the balanced subset of the training set.<br>
+Also the performance of a Neural Network is checked, on the full feature set.<br>
+Performance plots of the models are not exported because they have little business value.
+
+### 6. Prediction on new dataset
+The best performing model is then re-trained on the full training data set (without train-test split) and applied to calculate predictions and probabilities on a new data set.
+
+### 7. Further data analysis
+To conclude, some further analysis is done on the data to see if we can draw any further conclusions.
