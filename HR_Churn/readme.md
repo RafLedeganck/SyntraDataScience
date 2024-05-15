@@ -52,7 +52,7 @@ Also the performance of a Neural Network is checked, on the full feature set.<br
 Performance plots of the models are not exported because they have little business value.
 
 ### 6. Prediction on new dataset
-New file: Data/Employee_Churn_train.csv<br>
+New file: Data/Employee_Churn_apply.csv<br>
 The best performing model is then re-trained on the full training data set (without train-test split) and applied to calculate predictions and probabilities on a new data set.
 
 ### 7. Further data analysis
