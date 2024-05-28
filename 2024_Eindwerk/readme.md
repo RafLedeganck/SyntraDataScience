@@ -19,7 +19,7 @@ The program was written in the context of the course 'Data Scientist' at Syntra 
 # Folder structure
 <ul><li>root</li><ul>
     this file
-<li>\Docu: (o.a.) the business presentation (to come in a couple of days)</li>
+<li>\Docu: (o.a.) the business presentation (PPT)</li>
 <li>\Notebooks<ul>
     latest version of the program (Jupyter notebook)
     <li>\Backup: archive for old versions</li>
